@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { css } from "@emotion/css";
+import { CatchPokemon } from "../context/CatchPokemon";
 
 function ModalFailed() {
+  const { catchPokemon, setCatchPokemon } = useContext(CatchPokemon);
   return (
     <div
       className={css`
@@ -27,6 +29,14 @@ function ModalFailed() {
         `}
       >
         <h2>Failed Catch</h2>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setCatchPokemon({ ...catchPokemon, failed: false });
+          }}
+        >
+          Catch Again
+        </button>
       </div>
     </div>
   );

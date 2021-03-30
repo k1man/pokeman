@@ -1,9 +1,9 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext } from "react";
 import { css } from "@emotion/css";
+import { CatchPokemon } from "../context/CatchPokemon";
 
 function ModalForm({ name }) {
-  const history = useHistory();
+  const { catchPokemon, setCatchPokemon } = useContext(CatchPokemon);
   return (
     <div
       className={css`
@@ -32,7 +32,7 @@ function ModalForm({ name }) {
         <button
           onClick={(e) => {
             e.preventDefault();
-            history.push(`/details/${name}`);
+            setCatchPokemon({ ...catchPokemon, success: false });
           }}
         >
           Catch Again
