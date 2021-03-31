@@ -8,12 +8,13 @@ import ModalForm from "../components/ModalForm";
 import ModalFailed from "../components/ModalFailed";
 import LoadingLogo from "../assets/loadingLogo.gif";
 import CatchingLogo from "../assets/catchingLogo.gif";
-import { CatchPokemon } from "../context/CatchPokemon";
+import { CatchPokemon } from "../context";
 
 function Details() {
   const [loadingCatch, setLoading] = useState(false);
   const [catchPokemon, setCatchPokemon] = useState({
     success: false,
+    successAdd: false,
     failed: false,
   });
   const { name } = useParams();
@@ -39,20 +40,29 @@ function Details() {
     <div>
       <CatchPokemon.Provider value={{ catchPokemon, setCatchPokemon }}>
         <Navbar />
-        {catchPokemon.success && <ModalForm />}
-        {catchPokemon.failed && <ModalFailed />}
+        {catchPokemon.success && <ModalForm pokemon={data.pokemon} />}
+        {catchPokemon.failed && <ModalFailed name={data.pokemon.name} />}
+        {catchPokemon.successAdd && <ModalFailed name={data.pokemon.name} />}
         {loading ? (
-          <img
+          <div
             className={css`
-              width: 300px;
+              display: flex;
               align-items: center;
-              @media (min-width: 600px) {
-                width: 350px;
-              }
             `}
-            src={LoadingLogo}
-            alt="loadingPokemon"
-          />
+          >
+            <img
+              className={css`
+                width: 300px;
+                margin-right: auto;
+                margin-left: auto;
+                @media (min-width: 600px) {
+                  width: 350px;
+                }
+              `}
+              src={LoadingLogo}
+              alt="loadingPokemon"
+            />
+          </div>
         ) : error ? (
           <h1>error</h1>
         ) : (
@@ -75,9 +85,6 @@ function Details() {
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                @media (min-width: 600px) {
-                  flex-direction: row;
-                }
               `}
             >
               <img
@@ -86,7 +93,7 @@ function Details() {
                   margin-right: auto;
                   margin-left: auto;
                   @media (min-width: 600px) {
-                    width: 350px;
+                    width: 400px;
                   }
                 `}
                 src={
@@ -121,7 +128,7 @@ function Details() {
                   border-radius: 15px;
                   background-color: #00b894;
                   @media (min-width: 600px) {
-                    width: 350px;
+                    width: 400px;
                   }
                 `}
               >
@@ -196,31 +203,34 @@ function Details() {
                   })}
                 </div>
               </div>
-              <div
+              <h3
                 className={css`
                   width: 300px;
                   margin-top: 15px;
                   border-radius: 15px;
                 `}
               >
-                <h3>Moves</h3>
-                <div
-                  className={css`
-                    width: 300px;
-                    border-radius: 15px;
-                    background-color: #0984e3;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    padding: 15px;
-                    margin-bottom: 15px;
-                  `}
-                >
-                  {data.pokemon.moves.map(({ move }, index) => {
-                    return <p key={index}> - {move.name}</p>;
-                  })}
-                </div>
+                Moves
+              </h3>
+              <div
+                className={css`
+                  width: 300px;
+                  border-radius: 15px;
+                  background-color: #0984e3;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  flex-wrap: wrap;
+                  padding: 15px;
+                  margin-bottom: 15px;
+                  @media (min-width: 600px) {
+                    width: 400px;
+                  }
+                `}
+              >
+                {data.pokemon.moves.map(({ move }, index) => {
+                  return <p key={index}> - {move.name}</p>;
+                })}
               </div>
             </div>
           </div>

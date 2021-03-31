@@ -1,13 +1,19 @@
 import { Switch, Route } from "react-router-dom";
+import { css } from "@emotion/css";
 import Home from "./pages/Home";
 import Details from "./pages/Details";
-import Catch from "./pages/Catch";
+import Catch from "./pages/PokeDex";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="wrapper">
+    <div
+      className={css`
+        height: 100%;
+      `}
+    >
       <Switch>
-        <Route path="/catch">
+        <Route path="/pokedex">
           <Catch />
         </Route>
         <Route path="/details/:name">
@@ -17,6 +23,7 @@ function App() {
           <Home />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

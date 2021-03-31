@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const getPokemons = gql`
   query pokemons {
-    pokemons(limit: 15) {
+    pokemons(limit: 25) {
       results {
         id
         url

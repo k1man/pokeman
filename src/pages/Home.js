@@ -6,9 +6,11 @@ import backgroundLogo from "../assets/backgroundLogo.png";
 import LoadingLogo from "../assets/loadingLogo.gif";
 import PokeCard from "../components/PokeCard";
 import { getPokemons } from "../queries";
+import { useHistory } from "react-router-dom";
 
 function Home() {
   const { loading, error, data } = useQuery(getPokemons);
+  const history = useHistory();
 
   return (
     <Fragment>
@@ -46,8 +48,15 @@ function Home() {
           <br />
           Web Platform Engineers - Tokopedia
         </h3>
-        <button type="button" className="btn btn-primary btn-lg mt-2">
-          PokeList
+        <button
+          type="button"
+          className="btn btn-primary btn-lg mt-2"
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/pokedex");
+          }}
+        >
+          PokeDex
         </button>
       </div>
       <h1
@@ -60,17 +69,25 @@ function Home() {
         Pokemon List
       </h1>
       {loading ? (
-        <img
+        <div
           className={css`
-            width: 300px;
+            display: flex;
             align-items: center;
-            @media (min-width: 600px) {
-              width: 350px;
-            }
           `}
-          src={LoadingLogo}
-          alt="loadingPokemon"
-        />
+        >
+          <img
+            className={css`
+              width: 300px;
+              margin-right: auto;
+              margin-left: auto;
+              @media (min-width: 600px) {
+                width: 350px;
+              }
+            `}
+            src={LoadingLogo}
+            alt="loadingPokemon"
+          />
+        </div>
       ) : error ? (
         <div>Error</div>
       ) : (

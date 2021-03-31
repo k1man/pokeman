@@ -1,8 +1,21 @@
+import { useState, useEffect } from "react";
 import { css } from "@emotion/css";
 import { useHistory } from "react-router-dom";
 
 function PokeCard({ pokemon }) {
+  const [inPokedex, setInPokedex] = useState(0);
   const history = useHistory();
+  useEffect(() => {
+    const pokeDex = JSON.parse(localStorage.getItem("pokeDex"));
+    let totalPokemon = 0;
+    for (let i = 0; i < pokeDex.length; i++) {
+      if (pokeDex[i].name === pokemon.name) {
+        totalPokemon += 1;
+      }
+    }
+    setInPokedex(totalPokemon);
+  }, []);
+
   return (
     <button
       className={css`
@@ -41,10 +54,14 @@ function PokeCard({ pokemon }) {
           margin: 10px;
         `}
       >
-        <h5 className="card-title">
+        <h5
+          className={css`
+            text-align: center;
+          `}
+        >
           {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
         </h5>
-        <p className="card-text">Owned Total: 0</p>
+        <p className="card-text">Owned In PokeDex: {inPokedex}</p>
       </div>
     </button>
   );

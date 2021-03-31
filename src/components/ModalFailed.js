@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { css } from "@emotion/css";
-import { CatchPokemon } from "../context/CatchPokemon";
+import Pokeball from "../assets/emptyPokeball.gif";
+import { CatchPokemon } from "../context";
 
-function ModalFailed() {
+function ModalFailed({ name }) {
   const { catchPokemon, setCatchPokemon } = useContext(CatchPokemon);
   return (
     <div
@@ -22,14 +23,23 @@ function ModalFailed() {
           width: 300px;
           padding: 20px;
           position: absolute;
-          top: 50%;
+          top: 35%;
           left: 50%;
           transform: translate(-50%, -50%);
           z-index: 1;
+          text-align: center;
         `}
       >
-        <h2>Failed Catch</h2>
+        <img
+          className={css`
+            width: 200px;
+          `}
+          src={Pokeball}
+          alt="PokeBall"
+        />
+        <h4>You Failed Catch {name[0].toUpperCase() + name.slice(1)}</h4>
         <button
+          className="btn btn-primary"
           onClick={(e) => {
             e.preventDefault();
             setCatchPokemon({ ...catchPokemon, failed: false });

@@ -11,9 +11,15 @@ function Navbar() {
       style={{ backgroundImage: `url(${backgroundLogo})` }}
     >
       <div className="container-fluid">
-        <a
-          className="navbar-brand"
-          href="#"
+        <button
+          className={css`
+            background-color: Transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+          `}
           onClick={(e) => {
             e.preventDefault();
             history.push("/");
@@ -22,7 +28,6 @@ function Navbar() {
           <img
             className={css`
               width: 120px;
-              margin: 0 auto;
               @media (min-width: 600px) {
                 width: 170px;
               }
@@ -30,8 +35,16 @@ function Navbar() {
             src={logo}
             alt="pokeman"
           />
-        </a>
-        <button className="btn btn-primary">PokeList</button>
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={(e) => {
+            e.preventDefault();
+            history.push("/pokedex");
+          }}
+        >
+          PokeDex
+        </button>
       </div>
     </nav>
   );
