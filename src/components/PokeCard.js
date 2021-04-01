@@ -8,9 +8,11 @@ function PokeCard({ pokemon }) {
   useEffect(() => {
     const pokeDex = JSON.parse(localStorage.getItem("pokeDex"));
     let totalPokemon = 0;
-    for (let i = 0; i < pokeDex.length; i++) {
-      if (pokeDex[i].name === pokemon.name) {
-        totalPokemon += 1;
+    if (pokeDex) {
+      for (let i = 0; i < pokeDex.length; i++) {
+        if (pokeDex[i].name === pokemon.name) {
+          totalPokemon += 1;
+        }
       }
     }
     setInPokedex(totalPokemon);

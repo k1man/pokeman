@@ -29,40 +29,41 @@ function PokemonDex() {
         >
           My PokeDex
         </h2>
-        <div
-          className={css`
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-          `}
-        >
-          {pokeDex.length === 0 ? (
-            <div
+        {pokeDex.length === 0 ? (
+          <div
+            className={css`
+              min-height: 100vh;
+              text-align: center;
+            `}
+          >
+            <img
               className={css`
-                text-align: center;
+                width: 200px;
+                margin: 15px;
+                @media (min-width: 600px) {
+                  width: 350px;
+                }
               `}
-            >
-              <img
-                className={css`
-                  width: 200px;
-                  margin: 15px;
-                  @media (min-width: 600px) {
-                    width: 350px;
-                  }
-                `}
-                src={Pokedex}
-                alt="PokeBall"
-              />
-              <h3>PokeDex Empty</h3>
-              <h4>Please Catch a Pokemon and add to PokeDex</h4>
-            </div>
-          ) : (
-            pokeDex.map((pokemon, index) => {
+              src={Pokedex}
+              alt="PokeBall"
+            />
+            <h3>PokeDex Empty</h3>
+            <h4>Please Catch a Pokemon and add to PokeDex</h4>
+          </div>
+        ) : (
+          <div
+            className={css`
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: center;
+            `}
+          >
+            {pokeDex.map((pokemon, index) => {
               return <PokedexCard pokemon={pokemon} key={index} />;
-            })
-          )}
-        </div>
+            })}
+          </div>
+        )}
       </ListPokeDex.Provider>
     </div>
   );

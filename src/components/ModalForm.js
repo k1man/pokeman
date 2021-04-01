@@ -30,9 +30,11 @@ function ModalForm({ pokemon }) {
   const addPokeDex = (e) => {
     let count = 0;
     e.preventDefault();
-    for (let i = 0; i < pokeDex.length; i++) {
-      if (pokeDex[i].nickname.toLowerCase() === nickname.toLowerCase()) {
-        count += 1;
+    if (pokeDex) {
+      for (let i = 0; i < pokeDex.length; i++) {
+        if (pokeDex[i].nickname.toLowerCase() === nickname.toLowerCase()) {
+          count += 1;
+        }
       }
     }
 

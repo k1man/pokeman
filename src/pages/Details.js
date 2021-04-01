@@ -46,6 +46,7 @@ function Details() {
         {loading ? (
           <div
             className={css`
+              min-height: 100vh !important;
               display: flex;
               align-items: center;
             `}

@@ -20,9 +20,15 @@ function Footer() {
         </p>
       </div>
       <div>
-        <p>
+        <a
+          className={css`
+            text-decoration: none;
+            color: black;
+          `}
+          href="https://github.com/k1man/pokeman"
+        >
           <b>GitHub</b>
-        </p>
+        </a>
       </div>
     </div>
   );

@@ -71,6 +71,7 @@ function Home() {
       {loading ? (
         <div
           className={css`
+            min-height: 100vh;
             display: flex;
             align-items: center;
           `}
